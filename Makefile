@@ -1,8 +1,8 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -g -fsanitize=address -Isrc\
+CC = g++
+CFLAGS = -Wall -Wextra -Werror -std=c++17 -pedantic -g -fsanitize=address -Isrc\
 
 OBJS = \
-       src/c/rohDePollard.o \
+       src/cc/rohDePollard.o \
 
 BIN = rohDePollard
 
@@ -18,7 +18,7 @@ all: $(BIN)
 
 
 $(BIN): $(OBJS)
-	$(CC) src/main.c $^ -o $@ $(CFLAGS)
+	$(CC) src/main.cc $^ -o $@ $(CFLAGS)
 
 check: testsuite
 	./testsuite --verbose -j1

@@ -1,4 +1,4 @@
-#include "rohDePollard.h"
+#include "rohDePollard.hh"
 
 
 const int n = 1018, N = n + 1;  /* N = 1019 -- prime     */

@@ -1,4 +1,4 @@
-#include "c/rohDePollard.h"
+#include "cc/rohDePollard.hh"
 
 int main(void) {
     rhoDePollard();
