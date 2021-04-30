@@ -13,7 +13,7 @@ tandis que le problème inverse, l'exponentiation discrète,
 ne l'est pas (grâce à l'algorithme d'exponentiation rapide).  
 Cette asymétrie est exploitée en cryptologie, pour la cryptographie à clé publique.
 
-Pour calculer le logarithme d’un élément h, l’algorithme rho repose sur la recherche de collisions dans les termes d’une séquence obtenue en appliquant une fonction pseudo-aléatoire f de G dans G sur des éléments de la forme $$ x =gaihbi $$
+Pour calculer le logarithme d’un élément h, l’algorithme rho repose sur la recherche de collisions dans les termes d’une séquence obtenue en appliquant une fonction pseudo-aléatoire f de G dans G sur des éléments de la forme $x =gaihbi$
 
 ### Algorithme
 
