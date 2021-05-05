@@ -15,13 +15,8 @@ void new_xab( int &x, int &a, int &b, int n, int N, int alpha, int beta) {
 
 
 
-int main(int argc, char *argv[])
+int main(void)
 {
-    if (argc > 1)
-    {
-	std::cerr << "Please don't use argument\n";
-	exit(1);
-    }
     std::ifstream flux("hacked.txt");
 
     int p;
@@ -63,17 +58,18 @@ int main(int argc, char *argv[])
 
     long key = pow(ga, gamma);
     key = key % p;
-    std::cout << "key: " << key;
+    std::cout << "key: " << key << '\n';
 
     char *message = new char[encrypted.length() + 1];
     strcpy(message, encrypted.c_str());
 
-    for (int i = 0; i < strlen(message); i++)
+    for (size_t i = 0; i < strlen(message); i++)
     {
 	message[i] = encrypted[i] - key;
-	std::cout << encrypted[i];
     }
     std::cout << "Message: " << message << "\n";
+
+    delete [] message;
 
     return 0;
 }

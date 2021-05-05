@@ -1,11 +1,6 @@
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++17 -pedantic -g -fsanitize=address -Isrc\
 
-OBJS = \
-       src/cc/rohDePollard.o \
-
-BIN = rohDePollard
-
 #TEST_SUITE
 TEST_LDLIBS = -lcriterion \
 
@@ -14,11 +9,14 @@ TEST_LDFLAGS = -Wl,-rpath,.
 TEST_OBJS = src/tests/test.o \
 	    $(OBJS)
 
-all: $(BIN)
+all: alice pollard
 
+alice: 
+	$(CC) src/cc/AliceEtBob.cc -o AliceEtBob $(CFLAGS)
 
-$(BIN): $(OBJS)
-	$(CC) src/main.cc $^ -o $@ $(CFLAGS)
+pollard:
+	$(CC) src/cc/rohDePollard.cc -o rhoDePollard $(CFLAGS)
+
 
 check: testsuite
 	./testsuite --verbose -j1
@@ -28,5 +26,5 @@ testsuite: $(TEST_OBJS)
 
 
 clean:
-	$(RM) $(OBJS) testsuite $(TEST_OBJS) $(BIN)
+	$(RM)  testsuite AliceEtBob hacked.txt rhoDePollard
 .PHONY: all clean

@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     //Chiffrement
     char* message = argv[1];
     char* encrypted = message;
-    for (int i = 0; i < strlen(message); i++)
+    for (size_t i = 0; i < strlen(message); i++)
     {
 	encrypted[i] = message[i] + skB;
     }
