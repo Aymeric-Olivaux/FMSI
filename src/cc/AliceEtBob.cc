@@ -1,7 +1,9 @@
 #include <iostream>
+#include <cstring>
 #include <math.h>
+#include <fstream>
 
-int main(int argc, char *argv[])
+void argument(int argc, char *argv[])
 {
     for (int i = 0; i < argc; i++)
     {
@@ -24,18 +26,22 @@ int main(int argc, char *argv[])
 	std::cerr << "Bad number of argument! please try the -h flag\n";
 	exit(1);
     }
+}
 
-    int p = 23;
-    int g = 5;
-    std::string message(argv[1]);
+
+int main(int argc, char *argv[])
+{
+    argument(argc, argv);
+    int p = 23; //prime
+    int g = 5; //generator
     
     int a = 6; //SecretNumberAlice
     int b = 15; //SecretNumberBob
 
-    long A = pow(g, a);
+    long A = pow(g, a); //g^a
     A = A % p;
     
-    long B = pow(g, b);
+    long B = pow(g, b); //g^b
     B = B % p;
 
 
@@ -45,6 +51,28 @@ int main(int argc, char *argv[])
     long skB = pow(A, b); //SecretKeyB
     skB = skB % p;
     std::cout << "skA: " << skA << " skB: " << skB << '\n';
+
+    //Chiffrement
+    char* message = argv[1];
+    char* encrypted = message;
+    for (int i = 0; i < strlen(message); i++)
+    {
+	encrypted[i] = message[i] + skB;
+    }
+    std::cout << "Encrypted message: " << encrypted << "\n";
+
+    std::ofstream flux("hacked.txt");
+    if (!flux)
+	std::runtime_error("Cannot open the file\n");
+
+    flux << p << '\n';
+    flux << g << '\n';
+    flux << A << '\n';
+    flux << B << '\n';
+    flux << encrypted << '\n';
+    return 0;
+
+
 }
 
 
