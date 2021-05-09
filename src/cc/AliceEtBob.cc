@@ -13,7 +13,7 @@ void argument(int argc, char *argv[])
 	    std::cout 
 		<< "Alice & Bob help documentation:\n"
 		<< "Please use as described:\n"
-		<< ">_   ./AliceEtBob p g message\n"
+		<< ">_   ./AliceEtBob p g message (-p)\n"
 		<< "Where:\n"
 		<< "p is a prime number            (int)\n"
 		<< "g is a base                    (int)\n"
@@ -21,7 +21,7 @@ void argument(int argc, char *argv[])
 	    exit(2);
 	}
     }
-    if (argc != 2)
+    if (argc > 3)
     {
 	std::cerr << "Bad number of argument! please try the -h flag\n";
 	exit(1);
@@ -32,6 +32,24 @@ void argument(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
     argument(argc, argv);
+
+    int printflag = 0;
+
+    if (argc >= 3)
+    {
+        std::string temp = std::string(argv[1]);
+        std::string temp2 = std::string(argv[2]);
+
+        if ((temp.compare("-p") != 0) &&  (temp2.compare("-p") != 0))
+        {
+            std::cerr << "Bad argument! please try the -h flag\n";
+            return 1;
+        }
+
+        else
+            printflag = 1;
+    }
+
     int p = 23; //prime
     int g = 5; //generator
     
@@ -50,10 +68,16 @@ int main(int argc, char *argv[])
 
     long skB = pow(A, b); //SecretKeyB
     skB = skB % p;
+
+    if(printflag)
     std::cout << "skA: " << skA << " skB: " << skB << '\n';
 
     //Chiffrement
     char* message = argv[1];
+    if ((argc > 2) && (std::string(argv[1]).compare("-p")) == 0){
+    message = argv[2]; 
+    }
+
     char* encrypted = message;
     for (size_t i = 0; i < strlen(message); i++)
     {
@@ -74,5 +98,4 @@ int main(int argc, char *argv[])
 
 
 }
-
 
